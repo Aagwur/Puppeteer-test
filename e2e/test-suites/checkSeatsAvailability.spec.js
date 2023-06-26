@@ -14,7 +14,7 @@ describe('Check seats availability', () => {
         [ "Check sections with separate seats available", 1 ],
         [ "Check sections with paired seats available", 2 ],
       ]
-    )('%s', async (accessibleSeatsOptionNumber) => {
+    )('%s', async (title, accessibleSeatsOptionNumber) => {
       reporter.startStep(`Select ${accessibleSeatsOptionNumber} option in dropdown`);
       await page.waitForSelector('.accessability__select select');
       const accessibleSeatsDropdown = await page.$(".accessability__select select");

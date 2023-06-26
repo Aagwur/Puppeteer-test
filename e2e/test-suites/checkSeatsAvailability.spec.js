@@ -1,5 +1,6 @@
 const timeout = 30000;
-const { baseUrl } = require("../constants/urls");
+const { baseUrl } = require("../constants/urls.js");
+const { selectSeatPage } = require("../pages/selectSeat.page.js");
 
 describe('Check seats availability', () => {
     let page;
@@ -16,19 +17,10 @@ describe('Check seats availability', () => {
       ]
     )('%s', async (title, accessibleSeatsOptionNumber) => {
       reporter.startStep(`Select ${accessibleSeatsOptionNumber} option in dropdown`);
-      await page.waitForSelector('.accessability__select select');
-      const accessibleSeatsDropdown = await page.$(".accessability__select select");
-      await accessibleSeatsDropdown.select(`${accessibleSeatsOptionNumber}`); 
+      await selectSeatPage.selectAccessibleSeat({ page, numberOfSeats: accessibleSeatsOptionNumber });
       reporter.endStep();
       reporter.startStep(`Count sections with available seats`);
-      await page.waitForSelector('#Levels');
-      const sectionsData = (await page.evaluate(() => {
-        const allSections = Array.from(document.querySelectorAll('#Levels g'));
-        const activeSections = allSections.filter(el => el.getAttribute("class") !== 'unavailable');
-        const activeSectionsNames = activeSections.map(el => el.getAttribute("id"));
-        const activeSectionsCount = activeSections.length;
-        return { activeSectionsCount, activeSectionsNames }
-      }));
+      const sectionsData = await selectSeatPage.countSectionsWithSeats({ page });
       reporter.endStep();
       reporter.startStep(`There are ${sectionsData.activeSectionsCount} sections with available seats for 
         selected dropdown option: ${sectionsData.activeSectionsNames}`);

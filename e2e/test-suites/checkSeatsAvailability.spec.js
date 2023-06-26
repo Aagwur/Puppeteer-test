@@ -15,13 +15,10 @@ describe('Check seats availability', () => {
         [ "Check sections with separate seats available", 1 ],
         [ "Check sections with paired seats available", 2 ],
       ]
-    )('%s', async (title, accessibleSeatsOptionNumber) => {
-      reporter.startStep(`Select ${accessibleSeatsOptionNumber} option in dropdown`);
+    )('%s', async (title, accessibleSeatsOptionNumber) => {      
       await selectSeatPage.selectAccessibleSeat({ page, numberOfSeats: accessibleSeatsOptionNumber });
-      reporter.endStep();
-      reporter.startStep(`Count sections with available seats`);
       const sectionsData = await selectSeatPage.countSectionsWithSeats({ page });
-      reporter.endStep();
+      
       reporter.startStep(`There are ${sectionsData.activeSectionsCount} sections with available seats for 
         selected dropdown option: ${sectionsData.activeSectionsNames}`);
       reporter.endStep();

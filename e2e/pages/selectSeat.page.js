@@ -6,12 +6,15 @@ class SelectSeatPage {
     }
 
     async selectAccessibleSeat({ page, numberOfSeats }) {
+        reporter.startStep(`Select ${numberOfSeats} option in dropdown`);
         await page.waitForSelector(this.accessibleSeatsDropdown);
         const accessibleSeatsDropdown = await page.$(this.accessibleSeatsDropdown);
         await accessibleSeatsDropdown.select(`${numberOfSeats}`);
+        reporter.endStep();
     }
 
     async countSectionsWithSeats({ page }) {
+        reporter.startStep(`Count sections with available seats`);
         await page.waitForSelector(this.allSections);
         const sectionsData = (await page.evaluate(() => {
             const allSections = Array.from(document.querySelectorAll('#Levels g'));
@@ -20,6 +23,7 @@ class SelectSeatPage {
             const activeSectionsCount = activeSections.length;
             return { activeSectionsCount, activeSectionsNames }
         }));
+        reporter.endStep();
         return sectionsData;
     }
   }

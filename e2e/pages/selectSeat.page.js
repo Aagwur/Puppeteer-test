@@ -1,35 +1,35 @@
 class SelectSeatPage {
-    
-    constructor() {
-      this.accessibleSeatsDropdown = ".accessability__select select";
-      this.allSections = "#Levels";
-    }
-
-    async selectAccessibleSeat({ page, numberOfSeats }) {
-        reporter.startStep(`Select ${numberOfSeats} option in dropdown`);
-        await page.waitForSelector(this.accessibleSeatsDropdown);
-        const accessibleSeatsDropdown = await page.$(this.accessibleSeatsDropdown);
-        await accessibleSeatsDropdown.select(`${numberOfSeats}`);
-        reporter.endStep();
-    }
-
-    async countSectionsWithSeats({ page }) {
-        reporter.startStep(`Count sections with available seats`);
-        await page.waitForSelector(this.allSections);
-        const sectionsData = (await page.evaluate(() => {
-            const allSections = Array.from(document.querySelectorAll('#Levels g'));
-            const activeSections = allSections.filter(el => el.getAttribute("class") !== 'unavailable');
-            const activeSectionsNames = activeSections.map(el => el.getAttribute("id"));
-            const activeSectionsCount = activeSections.length;
-            return { activeSectionsCount, activeSectionsNames }
-        }));
-        reporter.endStep();
-        return sectionsData;
-    }
+  constructor() {
+    this.accessibleSeatsDropdown = '.accessability__select select';
+    this.allSections = '#Levels';
+    this.anyAvailableSeat = "//a[contains(text(), 'Any Best Available Seat')]";
   }
 
-  const selectSeatPage = new SelectSeatPage();
-  
-  module.exports = {
-    selectSeatPage,
-  };
+  async selectAccessibleSeat({ page, numberOfSeats }) {
+    reporter.startStep(`Select ${numberOfSeats} option in dropdown`);
+    await page.waitForSelector(this.accessibleSeatsDropdown);
+    const accessibleSeatsDropdown = await page.$(this.accessibleSeatsDropdown);
+    await accessibleSeatsDropdown.select(`${numberOfSeats}`);
+    reporter.endStep();
+  }
+
+  async countSectionsWithSeats({ page }) {
+    reporter.startStep('Count sections with available seats');
+    await page.waitForSelector(this.allSections);
+    const sectionsData = (await page.evaluate(() => {
+      const allSections = Array.from(document.querySelectorAll('#Levels g'));
+      const activeSections = allSections.filter((el) => el.getAttribute('class') !== 'unavailable');
+      const activeSectionsNames = activeSections.map((el) => el.getAttribute('id'));
+      const activeSectionsCount = activeSections.length;
+      return { activeSectionsCount, activeSectionsNames };
+    }));
+    reporter.endStep();
+    return sectionsData;
+  }
+}
+
+const selectSeatPage = new SelectSeatPage();
+
+module.exports = {
+  selectSeatPage,
+};

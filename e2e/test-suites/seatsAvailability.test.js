@@ -3,9 +3,7 @@ const { baseUrl } = require('../constants/urls');
 const { selectSeatPage } = require('../pages/selectSeat.page');
 
 describe('Seats availability', () => {
-  let page;
   beforeEach(async () => {
-    page = await globalThis.__BROWSER_GLOBAL__.newPage();
     await page.goto(baseUrl);
   }, timeout);
 

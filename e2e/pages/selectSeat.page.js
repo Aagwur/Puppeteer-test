@@ -2,7 +2,7 @@ class SelectSeatPage {
   constructor() {
     this.accessibleSeatsDropdown = '.accessability__select select';
     this.allSections = '#Levels';
-    this.anyAvailableSeat = "//a[contains(text(), 'Any Best Available Seat')]";
+    this.anyAvailableSeat = "//span[contains(text(), 'Any Best Available Seat')]";
   }
 
   async selectAccessibleSeat({ page, numberOfSeats }) {
@@ -25,6 +25,13 @@ class SelectSeatPage {
     }));
     reporter.endStep();
     return sectionsData;
+  }
+
+  async selectAnyAvailableSeat({ page }) {
+    await page.waitForXPath(this.anyAvailableSeat);
+    const button = await page.$x(this.anyAvailableSeat);
+    await page.click(button);
+    expect(5).toEqual(5);
   }
 }
 

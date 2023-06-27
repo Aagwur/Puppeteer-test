@@ -26,7 +26,7 @@ module.exports = {
   // ],
 
   // Indicates which provider should be used to instrument code for coverage
-  coverageProvider: "v8",
+  coverageProvider: 'v8',
 
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
@@ -95,13 +95,13 @@ module.exports = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: undefined,
+  preset: 'jest-puppeteer',
 
   // Run tests from one or more projects
   // projects: undefined,
 
   // Use this configuration option to add custom reporters to Jest
-  reporters: ["default", "jest-allure"],
+  reporters: ['default', 'jest-allure'],
 
   // Automatically reset mock state before every test
   // resetMocks: false,
@@ -130,7 +130,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ["jest-allure/dist/setup"],
+  setupFilesAfterEnv: ['jest-allure/dist/setup'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
@@ -159,13 +159,13 @@ module.exports = {
   // ],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
-  // testRegex: [],
+  testRegex: './*\\.test\\.js$',
 
   // This option allows the use of a custom results processor
   // testResultsProcessor: undefined,
 
   // This option allows use of a custom test runner
-  testRunner: "jest-jasmine2",
+  testRunner: 'jest-jasmine2',
 
   // A map from regular expressions to paths to transformers
   // transform: undefined,
@@ -187,7 +187,4 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-  globalSetup: './e2e/test-utils/puppeteer/setup.js',
-  globalTeardown: './e2e/test-utils/puppeteer/teardown.js',
-  testEnvironment: './e2e/test-utils/puppeteer/puppeteer_environment.js',
 };

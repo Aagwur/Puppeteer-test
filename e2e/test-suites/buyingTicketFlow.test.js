@@ -15,6 +15,7 @@ describe('Buying ticket flow', () => {
     const orderDataConfirmSeats = await confirmSeatPage.getOrderData();
     await confirmSeatPage.confirmSeats({ page });
     const orderDataPayment = await paymentPage.getOrderData();
+
     reporter.startStep(`Verify that price: ${orderDataConfirmSeats.totalPriceText} and date: 
     ${orderDataConfirmSeats.dateText} on Payment page is the same as on Confirm Seats page`);
     expect(orderDataConfirmSeats.totalPriceText).toEqual(orderDataPayment.totalPriceText);

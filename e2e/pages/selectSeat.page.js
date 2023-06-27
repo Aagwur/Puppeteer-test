@@ -26,7 +26,6 @@ class SelectSeatPage {
   }
 
   async countSectionsWithSeats({ page }) {
-    reporter.startStep('Count sections with available seats');
     await page.waitForSelector(this.allSections);
     const sectionsData = (await page.evaluate(() => {
       const allSections = Array.from(document.querySelectorAll('#Levels g'));
@@ -35,17 +34,18 @@ class SelectSeatPage {
       const activeSectionsCount = activeSections.length;
       return { activeSectionsCount, activeSectionsNames };
     }));
-    reporter.endStep();
     return sectionsData;
   }
 
   async selectAnyAvailableSeat({ page }) {
+    reporter.startStep('Select any available seat and click continue');
     await page.waitForXPath(this.anyAvailableSeat);
     const anyAvailableSeat = await page.$x(this.anyAvailableSeat);
     await anyAvailableSeat[0].click();
     const continueButton = await page.$x(this.continueButton);
     await continueButton[0].click();
-    await page.waitForNavigation();
+    await page.waitForNetworkIdle();
+    reporter.endStep();
   }
 }
 

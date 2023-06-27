@@ -13,8 +13,8 @@ describe('Seats availability', () => {
       ['Check sections with separate seats available', 1],
       ['Check sections with paired seats available', 2],
     ],
-  )('%s', async (title, accessibleSeatsOptionNumber) => {
-    await selectSeatPage.selectAccessibleSeat({ page, numberOfSeats: accessibleSeatsOptionNumber });
+  )('%s', async (title, ticketsNumber) => {
+    await selectSeatPage.clickDecreaseButton({ page, clickAmount: 2 - ticketsNumber });
     const sectionsData = await selectSeatPage.countSectionsWithSeats({ page });
 
     reporter.startStep(`There are ${sectionsData.activeSectionsCount} sections with available seats for 

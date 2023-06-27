@@ -2,11 +2,23 @@ class SelectSeatPage {
   constructor() {
     this.accessibleSeatsDropdown = '.accessability__select select';
     this.allSections = '#Levels';
+    this.decreaseButton = '[aria-label="Decrease amount of tickets"]';
     this.anyAvailableSeat = "//span[contains(text(), 'Any Best Available Seat')]";
+    this.continueButton = "//button[contains(text(), 'Continue')]";
+  }
+
+  async clickDecreaseButton({ page, clickAmount }) {
+    reporter.startStep(`Decrease tickets amount by ${clickAmount}`);
+    await page.waitForSelector(this.decreaseButton);
+    const decreaseButton = await page.$(this.decreaseButton);
+    for (let i = 0; i < clickAmount; i += 1) {
+      await decreaseButton.click();
+    }
+    reporter.endStep();
   }
 
   async selectAccessibleSeat({ page, numberOfSeats }) {
-    reporter.startStep(`Select ${numberOfSeats} option in dropdown`);
+    reporter.startStep(`Select ${numberOfSeats} option in accessible seats dropdown`);
     await page.waitForSelector(this.accessibleSeatsDropdown);
     const accessibleSeatsDropdown = await page.$(this.accessibleSeatsDropdown);
     await accessibleSeatsDropdown.select(`${numberOfSeats}`);
@@ -29,9 +41,11 @@ class SelectSeatPage {
 
   async selectAnyAvailableSeat({ page }) {
     await page.waitForXPath(this.anyAvailableSeat);
-    const button = await page.$x(this.anyAvailableSeat);
-    await page.click(button);
-    expect(5).toEqual(5);
+    const anyAvailableSeat = await page.$x(this.anyAvailableSeat);
+    await anyAvailableSeat[0].click();
+    const continueButton = await page.$x(this.continueButton);
+    await continueButton[0].click();
+    await page.waitForNavigation();
   }
 }
 

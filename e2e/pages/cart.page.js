@@ -1,4 +1,4 @@
-class PaymentPage {
+class CartPage {
   constructor() {
     this.totalPrice = '[class="price basket__lineItem__desktop"]';
     this.date = '.performance-date-info';
@@ -14,8 +14,8 @@ class PaymentPage {
   }
 }
 
-const paymentPage = new PaymentPage();
+const cartPage = new CartPage();
 
 module.exports = {
-  paymentPage,
+  cartPage,
 };

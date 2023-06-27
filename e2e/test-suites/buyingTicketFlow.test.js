@@ -2,7 +2,7 @@ const timeout = 30000;
 const { baseUrl } = require('../constants/urls');
 const { selectSeatPage } = require('../pages/selectSeat.page');
 const { confirmSeatPage } = require('../pages/confirmSeat.page');
-const { paymentPage } = require('../pages/payment.page');
+const { cartPage } = require('../pages/cart.page');
 
 describe('Buying ticket flow', () => {
   beforeEach(async () => {
@@ -14,7 +14,7 @@ describe('Buying ticket flow', () => {
     await selectSeatPage.selectAnyAvailableSeat({ page });
     const orderDataConfirmSeats = await confirmSeatPage.getOrderData({ page });
     await confirmSeatPage.confirmSeats({ page });
-    const orderDataPayment = await paymentPage.getOrderData({ page });
+    const orderDataPayment = await cartPage.getOrderData({ page });
 
     reporter.startStep(`Verify that price: ${orderDataConfirmSeats.totalPriceText} and date: 
     ${orderDataConfirmSeats.dateText} on Payment page is the same as on Confirm Seats page`);

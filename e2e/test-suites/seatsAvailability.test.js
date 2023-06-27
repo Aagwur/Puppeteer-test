@@ -17,8 +17,8 @@ describe('Seats availability', () => {
     await selectSeatPage.clickDecreaseButton({ page, clickAmount: 2 - ticketsNumber });
     const sectionsData = await selectSeatPage.countSectionsWithSeats({ page });
 
-    reporter.startStep(`There are ${sectionsData.activeSectionsCount} sections with available seats for 
-        selected dropdown option: ${sectionsData.activeSectionsNames}`);
+    reporter.startStep(`There are ${sectionsData.activeSectionsCount} sections with available
+     ${ticketsNumber} seats: ${sectionsData.activeSectionsNames}`);
     reporter.endStep();
   }, timeout);
 });

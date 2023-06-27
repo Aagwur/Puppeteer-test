@@ -12,9 +12,9 @@ describe('Buying ticket flow', () => {
   test('Check data on Cart page', async () => {
     await selectSeatPage.clickDecreaseButton({ page, clickAmount: 1 });
     await selectSeatPage.selectAnyAvailableSeat({ page });
-    const orderDataConfirmSeats = await confirmSeatPage.getOrderData();
+    const orderDataConfirmSeats = await confirmSeatPage.getOrderData({ page });
     await confirmSeatPage.confirmSeats({ page });
-    const orderDataPayment = await paymentPage.getOrderData();
+    const orderDataPayment = await paymentPage.getOrderData({ page });
 
     reporter.startStep(`Verify that price: ${orderDataConfirmSeats.totalPriceText} and date: 
     ${orderDataConfirmSeats.dateText} on Payment page is the same as on Confirm Seats page`);

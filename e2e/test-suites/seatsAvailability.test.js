@@ -4,7 +4,7 @@ const { selectSeatPage } = require('../pages/selectSeat.page');
 
 describe('Seats availability', () => {
   beforeEach(async () => {
-    await page.goto(baseUrl);
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
   }, timeout);
 
   test.each(

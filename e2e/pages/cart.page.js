@@ -1,7 +1,7 @@
 class CartPage {
   constructor() {
     this.totalPrice = '[class="price basket__lineItem__desktop"]';
-    this.date = '.performance-date-info';
+    this.date = '[class="performance-date-info"]';
   }
 
   async getOrderData({ page }) {

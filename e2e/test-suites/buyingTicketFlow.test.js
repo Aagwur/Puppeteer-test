@@ -5,8 +5,8 @@ const { confirmSeatPage } = require('../pages/confirmSeat.page');
 const { cartPage } = require('../pages/cart.page');
 
 describe('Buying ticket flow', () => {
-  beforeEach(async () => {
-    await page.goto(baseUrl);
+  beforeAll(async () => {
+    await page.goto(baseUrl, { waitUntil: 'domcontentloaded' });
   }, timeout);
 
   test('Check data on Cart page', async () => {

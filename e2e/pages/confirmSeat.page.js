@@ -19,7 +19,7 @@ class ConfirmSeatPage {
     await page.waitForXPath(this.confirmSeatsButton);
     const confirmSeatsButton = await page.$x(this.confirmSeatsButton);
     await confirmSeatsButton[0].click();
-    await page.waitForNetworkIdle();
+    await page.waitForNavigation();
     reporter.endStep();
   }
 }

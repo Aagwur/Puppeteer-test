@@ -20,6 +20,7 @@ describe('Buying ticket flow', () => {
     ${orderDataConfirmSeats.dateText} on Payment page is the same as on Confirm Seats page`);
     expect(orderDataConfirmSeats.totalPriceText).toEqual(orderDataPayment.totalPriceText);
     expect(orderDataConfirmSeats.dateText).toEqual(orderDataPayment.dateTextFormatted);
+    expect(orderDataConfirmSeats.quantity).toEqual(orderDataPayment.quantityText);
     reporter.endStep();
   }, timeout);
 });
